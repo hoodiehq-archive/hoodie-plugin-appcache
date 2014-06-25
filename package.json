@@ -1,0 +1,11 @@
+{
+  "name": "hoodie-plugin-appcache",
+  "version": "0.0.1",
+  "authors": [
+    "Gregor Martynus <gregor@martynus.net>"
+  ],
+  "description": "Auto Updates and more for Offline First Applications",
+  "dependencies": {
+    "appcache-nanny": "0.0.2"
+  }
+}
