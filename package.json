@@ -4,8 +4,12 @@
   "authors": [
     "Gregor Martynus <gregor@martynus.net>"
   ],
+  "main": "worker.js",
   "description": "Auto Updates and more for Offline First Applications",
   "dependencies": {
-    "appcache-nanny": "0.0.2"
+    "appcache-nanny": "0.0.1",
+    "node-watch": "~0.3.4",
+    "glob": "~4.0.2",
+    "render-appcache-manifest": "~0.3.0"
   }
 }
