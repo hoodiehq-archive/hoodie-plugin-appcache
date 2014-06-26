@@ -84,6 +84,19 @@ hoodie.appCache.on('init:progress', handleInitialProgress)
 hoodie.appCache.on('init:cached', handleInitialCached)
 ```
 
+How it works
+------------
+
+The appCache Hoodie Plugin automatically scans your app's `www/` folder
+and adds all assets to the `manifest.appcache` to make them available
+offline. Each time an asset changes the `manifest.appcache` gets changed
+to trigger an update.
+
+`hoodie.appCache.start()` add's a hidden `<iframe>` to the page that loads
+`appcache-loader.html`. That's an empty HTML file has the `manifest` property
+on its `<html>` tag to start or update the local cache. Both files are served
+from the appCache Hoodie Plugin's hook API.
+
 
 Fine Print
 ----------
