@@ -14,10 +14,10 @@ module.exports = function (hoodie) {
           hoodie.task.emit('appcache:update');
           break;
         case 'loader':
-          reply.file(__dirname + '/../appcache-loader.html');
+          reply.file(__dirname + '/../../appcache-nanny/appcache-loader.html');
           break;
         case 'manifest':
-          reply.file(__dirname + '/../../../manifest.appcache');
+          reply(hoodie.config.get('manifest'));
           break;
         default:
           reply(JSON.stringify({
