@@ -35,15 +35,17 @@ module.exports = function(directory, outFilename) {
 		})
 			.on('end', function() {
 				var output = radm(contents);
-				
-				fs.writeFile(outFilename, output, function(error) {
-					if (error) {
-						if (err) err(error);
-						return;
-					}
 
-					if (cb) cb(output);
-				});
+				if (outFilename) {
+					fs.writeFile(outFilename, output, function(error) {
+						if (error) {
+							if (err) err(error);
+							return;
+						}
+					});
+				}
+
+				if (cb) cb(output);
 			});
 	}
 

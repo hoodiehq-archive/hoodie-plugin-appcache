@@ -5,12 +5,17 @@ module.exports = function (hoodie, callback) {
 	// Hack until I can get a path var from hoodie
 	var path = __dirname + '/../../www/';
 
-	// Manually copy file until we can get appcache-nanny to work with 
-	// the plugin API
-	fs.createReadStream(__dirname + '/appcache-loader.html')
-		.pipe(fs.createWriteStream(path + 'appcache-loader.html'));
+	var loaderHTML = 
+		'<!DOCTYPE html>' +
+		'<html manifest="/_api/_plugins/appcache/_api/manifest">' +
+		'<head><meta charset="utf-8" /><title>appCache loader</title></head>' +
+		'<body></body></html>';
 
-	var gen = generator(path, 'manifest.appcache');
+	hoodie.config.set('loader', loaderHTML);
+
+	// Omitting an output file path will make the generator only 
+	// pass the resulting text to the callback.
+	var gen = generator(path);
 
 	var updated = function(manifestText) {
 		hoodie.config.set('manifest', manifestText);
