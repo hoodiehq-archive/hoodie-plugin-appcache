@@ -14,7 +14,7 @@ module.exports = function (hoodie) {
           hoodie.task.emit('appcache:update');
           break;
         case 'loader':
-          reply.file(__dirname + '/../../appcache-nanny/appcache-loader.html');
+          reply(hoodie.config.get('loader'));
           break;
         case 'manifest':
           reply(hoodie.config.get('manifest'));
