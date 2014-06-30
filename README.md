@@ -23,7 +23,7 @@ Installation
 ------------
 
 ```
-hoodie install appache
+hoodie install appcache
 ```
 
 Usage
