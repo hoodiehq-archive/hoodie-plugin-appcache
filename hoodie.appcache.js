@@ -9,6 +9,9 @@ Hoodie.extend(function(hoodie, lib, utils) {
   var store = utils.localStorageWrapper;
   var appCacheUpdated = store.getItem(APPCACHE_UPDATED_KEY) || false;
 
+  // use the appcache loader provided by the plugin
+  appCacheNanny.set( 'loaderPath', '/_api/_plugins/appcache/_api/loader');
+
   // use the appCacheNanny connection events to
   // check hoodie's connection
   appCacheNanny.on('offline', hoodie.checkConnection);
