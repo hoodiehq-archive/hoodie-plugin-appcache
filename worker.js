@@ -7,7 +7,7 @@ module.exports = function (hoodie, callback) {
 
 	var loaderHTML = 
 		'<!DOCTYPE html>' +
-		'<html manifest="/_api/_plugins/appcache/_api/manifest">' +
+		'<html manifest="/_api/_plugins/appcache/_api/manifest.appcache">' +
 		'<head><meta charset="utf-8" /><title>appCache loader</title></head>' +
 		'<body></body></html>';
 
