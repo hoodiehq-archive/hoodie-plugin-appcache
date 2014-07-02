@@ -16,8 +16,9 @@ module.exports = function (hoodie) {
         case 'loader':
           reply(hoodie.config.get('loader'));
           break;
-        case 'manifest':
-          reply(hoodie.config.get('manifest'));
+        case 'manifest.appcache':
+          reply(hoodie.config.get('manifest'))
+            .type('text/cache-manifest');
           break;
         default:
           reply(JSON.stringify({
