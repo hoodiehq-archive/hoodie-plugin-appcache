@@ -4,6 +4,15 @@
   "authors": [
     "Gregor Martynus <gregor@martynus.net>"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gr2m/hoodie-plugin-appcache.git"
+  },
+  "keywords": [
+    "hoodie",
+    "appcache",
+    "offlinefirst"
+  ],
   "main": "worker.js",
   "description": "Auto Updates and more for Offline First Applications",
   "dependencies": {
