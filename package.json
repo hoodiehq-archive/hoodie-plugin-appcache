@@ -2,7 +2,8 @@
   "name": "hoodie-plugin-appcache",
   "version": "0.1.0",
   "authors": [
-    "Gregor Martynus <gregor@martynus.net>"
+    "Gregor Martynus <gregor@martynus.net>",
+    "Michael Oneppo <moneppo@gmail.com>"
   ],
   "repository": {
     "type": "git",
