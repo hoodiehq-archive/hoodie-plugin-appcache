@@ -104,7 +104,7 @@ Fine Print
 
 [appCache Hoodie Plugin](https://github.com/gr2m/hoodie-plugin-appcache)
 has been authored by [Gregor Martynus](https://github.com/gr2m),
-proud member of [Team Hoodie](http://hood.ie/).
+proud member of [Team Hoodie](http://hood.ie/), with help from [Michael Oneppo](https://github.com/moneppo).
 Please support our work: [gittip us](https://www.gittip.com/hoodiehq/).
 
 License: MIT
