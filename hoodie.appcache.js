@@ -4,6 +4,7 @@ Hoodie.extend(function(hoodie, lib, utils) {
 
   var appCacheNanny = require('appcache-nanny');
   var appCache = {};
+  var updateDefer;
 
   var APPCACHE_UPDATED_KEY = '_hoodie_appcache_updated';
   var store = utils.localStorageWrapper;
@@ -44,11 +45,28 @@ Hoodie.extend(function(hoodie, lib, utils) {
     };
   }
 
+  // wraps `appCacheNanny.start` into a promise
   appCache.start = function start(options) {
-    return appCacheNanny.start(options);
+    return wrapIntoUpdatePromise('start', options)
+    .done(function() {
+      // appCache.start & appCache.update are throttled using the same promise.
+      // In case appCache.start is called but a promise by a previous
+      // appCache.update is still pending, we need to make sure that appCache
+      // nanny still starts the interval checking
+      if (appCacheNanny.isCheckingForUpdates()) return;
+      appCacheNanny.start(options);
+    });
   };
+
+  // wraps `appCacheNanny.check` into a promise
+  appCache.update = function update() {
+    appCache.trigger('update');
+    return wrapIntoUpdatePromise('check');
+  };
+
   appCache.stop = function stop() {
-    return appCacheNanny.stop();
+    appCacheNanny.stop();
+    return utils.promise.resolve();
   };
   appCache.hasUpdate = function hasUpdate() {
     return appCacheNanny.hasUpdate();
@@ -60,21 +78,20 @@ Hoodie.extend(function(hoodie, lib, utils) {
     return appCacheNanny.isCheckingForUpdates();
   };
 
-  // wraps `appCacheNanny.check` into a promise returning method.
+  function setAppcacheUpdatedFlag() {
+    store.setItem(APPCACHE_UPDATED_KEY, 1);
+  }
+
   // - rejects on error
   // - resolves with true if update downloaded and ready
   // - resolves with false if there is no update
   // - calls progress callbacks on 'downloading' event.
   // - throttles multiple update calls
-  var updateDefer;
-  appCache.update = function update() {
-    appCache.trigger('check');
-
+  function wrapIntoUpdatePromise (method, options) {
     if (updateDefer && updateDefer.state() === 'pending') {
-        return updateDefer.promise();
+      return updateDefer.promise();
     }
     updateDefer = utils.promise.defer();
-
 
     if (! appCacheNanny.isSupported()) {
       appCache.trigger('notsupported');
@@ -110,13 +127,9 @@ Hoodie.extend(function(hoodie, lib, utils) {
     }
 
     toggleBind('on');
-    appCacheNanny.check();
+    appCacheNanny[method](options);
 
     return updateDefer.promise();
-  };
-
-  function setAppcacheUpdatedFlag() {
-    store.setItem(APPCACHE_UPDATED_KEY, 1);
   }
 
   if (appCacheUpdated) {
