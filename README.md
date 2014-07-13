@@ -71,6 +71,7 @@ hoodie.appCache.isCheckingForUpdates()
 The appCache comes also with a list of events that you can react on
 
 ```js
+hoodie.appCache.on('update', handleUpdate)
 hoodie.appCache.on('error', handleError)
 hoodie.appCache.on('noupdate', handleNoUpdate)
 hoodie.appCache.on('downloading', handleDownloading)

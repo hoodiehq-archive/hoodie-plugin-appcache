@@ -58,10 +58,10 @@ Hoodie.extend(function(hoodie, lib, utils) {
     });
   };
 
-  // wraps `appCacheNanny.check` into a promise
+  // wraps `appCacheNanny.update` into a promise
   appCache.update = function update() {
     appCache.trigger('update');
-    return wrapIntoUpdatePromise('check');
+    return wrapIntoUpdatePromise('update');
   };
 
   appCache.stop = function stop() {
