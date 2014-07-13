@@ -15,7 +15,11 @@ module.exports = function(directory, outFilename) {
 		var contents = {
 			// By default we want to completely disable all access to the
 			// outside world for static resources
-			network: options.network || ['/_api'],
+
+      // NOTE: we cannot set NETWORK to /_api, as it conflicts
+      // with /_api/_files/hoodie.js
+      // network: options.network || ['/_api'],
+			network: options.network || ['*'],
 			cache: [],
 			fallback: options.fallback || {'/': '/'},
 			lastModified: options.modified || new Date(),
@@ -36,6 +40,8 @@ module.exports = function(directory, outFilename) {
 					}
 				}
 			})
+
+      contents.cache.push('/_api/_files/hoodie.js');
 		})
 			.on('end', function() {
 				var output = radm(contents);
