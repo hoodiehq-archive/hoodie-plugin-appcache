@@ -24,6 +24,9 @@ Installation
 
 ```
 hoodie install appcache
+# this is needed as temporary workaround for
+# https://github.com/hoodiehq/hoodie-plugin-appcache/issues/7
+npm install -S appcache-nanny
 ```
 
 Usage
