@@ -49,15 +49,15 @@ Here's a list of all avialable methods:
 ```js
 // start initial caching & auto-updating, returns promise
 hoodie.appCache.start({
-  // in ms
+  // in ms, defaults to 30000
   checkInterval: 10000,
 
-  // if you have a custom manifest file
-  manifest: '/myapp.manifest',
+  // in ms, defaults to 30000
+  offlineCheckInterval: 5000,
 
-  // if you have a custom manifest loader,
-  // makes `manifest` option obsolete
-  appCacheLoader: '/appcache-loder.html',
+  // set a path to your custom manifest loader,
+  // defaults to /_api/_plugins/appcache/_api/loader
+  loaderPath: '/appcache-loder.html',
 });
 // manually check for updates, returns promise
 hoodie.appCache.update()
@@ -69,6 +69,13 @@ hoodie.appCache.hasUpdate()
 hoodie.appCache.isSupported()
 // returns true / false
 hoodie.appCache.isCheckingForUpdates()
+// get / change settings
+hoodie.appCache.set('checkInterval', 20000)
+hoodie.appCache.set('offlineCheckInterval', 10000)
+hoodie.appCache.set('loaderPath', '/new/appcache-loader.html')
+var checkInterval = hoodie.appCache.get('checkInterval')
+var offlineCheckInterval = hoodie.appCache.get('offlineCheckInterval')
+var loaderPath = hoodie.appCache.get('loaderPath')
 ```
 
 The appCache comes also with a list of events that you can react on
