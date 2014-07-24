@@ -77,6 +77,12 @@ Hoodie.extend(function(hoodie, lib, utils) {
   appCache.isCheckingForUpdates = function isCheckingForUpdates() {
     return appCacheNanny.isCheckingForUpdates();
   };
+  appCache.set = function set() {
+    return appCacheNanny.set.apply(appCacheNanny, arguments);
+  };
+  appCache.get = function get() {
+    return appCacheNanny.get.apply(appCacheNanny, arguments);
+  };
 
   function setAppcacheUpdatedFlag() {
     store.setItem(APPCACHE_UPDATED_KEY, 1);
