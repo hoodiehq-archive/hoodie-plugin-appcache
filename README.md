@@ -4,7 +4,7 @@ appCache Hoodie Plugin
 > Auto Updates and more for Offline First Applications
 
 Hoodie has offline-support built in—for data. If you want to make your app
-work offline as well, you have work with Application Cache – [and he's a
+work offline as well, you have work with Application Cache – [and it's a
 douchebag](http://alistapart.com/article/application-cache-is-a-douchebag).
 
 Until now.
@@ -114,7 +114,7 @@ Fine Print
 
 [appCache Hoodie Plugin](https://github.com/gr2m/hoodie-plugin-appcache)
 has been authored by [Gregor Martynus](https://github.com/gr2m),
-proud member of [Team Hoodie](http://hood.ie/), with help from [Michael Oneppo](https://github.com/moneppo).
+proud member of [The Hoodie Community](http://hood.ie/), with help from [Michael Oneppo](https://github.com/moneppo).
 Please support our work: [gittip us](https://www.gittip.com/hoodiehq/).
 
 License: MIT
