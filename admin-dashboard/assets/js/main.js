@@ -1,25 +1,35 @@
 $(function () {
-    var sync = _.partial(couchr.put, '/_api/_plugins/appcache/_api/update');
-    var getConfig = _.partial(couchr.get, '/_api/plugins/plugin%2Fhoodie-plugin-appcache');
+  var hoodieAdmin = top.hoodieAdmin;
 
-    function updateManifest(text) {
-      var code = text.replace(/\n/g, '<br/>');
-      $('[name=manifest]').html('<code>' + code + '</code>');
-    }
+  function getManifest(callback) {
+    hoodieAdmin.request('GET', '/_plugins/appcache/_api/update')
+      .fail(function(error) { callback(error); })
+      .done(function(response) { callback(null, response); })
+  }
+  function getConfig(callback) {
+    hoodieAdmin.request('GET', '/plugins/plugin%2Fhoodie-plugin-appcache')
+      .fail(function(error) { callback(error); })
+      .done(function(response) { callback(null, response); })
+  }
 
-    $('#reset').click(function (ev) {
-        $('[name=manifest]').html('<img src="assets/images/loading32.gif"></img>');
-        sync(function(err, doc) {
-          if (err) {
-            alert("Error trying to sync");
-          }
+  function updateManifest(text) {
+    var code = text.replace(/\n/g, '<br/>');
+    $('[name=manifest]').html('<code>' + code + '</code>');
+  }
 
-          var text = JSON.parse(doc).manifest;
-          updateManifest(text);
-        });
-    });
+  $('#reset').click(function (ev) {
+      $('[name=manifest]').html('<img src="assets/images/loading32.gif"></img>');
+      getManifest(function(err, doc) {
+        if (err) {
+          alert("Error trying to sync");
+        }
 
-    getConfig(function(err, doc) {
-      updateManifest(doc.config.manifest);
-    })
+        var text = doc.manifest;
+        updateManifest(text);
+      });
+  });
+
+  getConfig(function(err, doc) {
+    updateManifest(doc.config.manifest);
+  })
 });
