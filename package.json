@@ -1,6 +1,6 @@
 {
   "name": "hoodie-plugin-appcache",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "authors": [
     "Gregor Martynus <gregor@martynus.net>",
     "Michael Oneppo <moneppo@gmail.com>"
