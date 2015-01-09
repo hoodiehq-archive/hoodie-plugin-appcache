@@ -32,7 +32,8 @@ module.exports = function(directory, outFilename) {
 			}
 
 			files.forEach(function(element, index, array) {
-				if (element.indexOf(outFilename) == -1) {
+				// exclude files on blacklist; include only files (no directories)
+				if (element.indexOf(outFilename) == -1 && fs.lstatSync(dir + element).isFile()) {
 					if (element == 'index.html') {
 						contents.cache.push('/');
 					} else {
