@@ -17,9 +17,9 @@
   "main": "worker.js",
   "description": "Auto Updates and more for Offline First Applications",
   "dependencies": {
-    "appcache-nanny": "^0.0.6",
-    "node-watch": "~0.3.4",
+    "appcache-nanny": "^1.0.0",
     "glob": "~4.0.2",
+    "node-watch": "~0.3.4",
     "render-appcache-manifest": "~0.3.0"
   }
 }
