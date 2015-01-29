@@ -19,10 +19,7 @@ Hoodie.extend(function(hoodie, lib, utils) {
   appCacheNanny.on('online', hoodie.checkConnection);
 
   // add events API
-  lib.events(hoodie, {
-    context: appCache,
-    namespace: 'appcache'
-  });
+  utils.events(hoodie, appCache, 'appcache');
 
   // proxy events
   appCacheNanny.on('error', proxyEvent('error'));
@@ -53,7 +50,9 @@ Hoodie.extend(function(hoodie, lib, utils) {
       // In case appCache.start is called but a promise by a previous
       // appCache.update is still pending, we need to make sure that appCache
       // nanny still starts the interval checking
-      if (appCacheNanny.isCheckingForUpdates()) return;
+      if (appCacheNanny.isCheckingForUpdates()) {
+        return;
+      }
       appCacheNanny.start(options);
     });
   };
@@ -95,7 +94,7 @@ Hoodie.extend(function(hoodie, lib, utils) {
   // - throttles multiple update calls
   function wrapIntoUpdatePromise (method, options) {
     if (updateDefer && updateDefer.state() === 'pending') {
-      return updateDefer.promise();
+      return updateDefer.promise;
     }
     updateDefer = utils.promise.defer();
 
@@ -135,7 +134,7 @@ Hoodie.extend(function(hoodie, lib, utils) {
     toggleBind('on');
     appCacheNanny[method](options);
 
-    return updateDefer.promise();
+    return updateDefer.promise;
   }
 
   if (appCacheUpdated) {
