@@ -93,7 +93,7 @@ Hoodie.extend(function(hoodie, lib, utils) {
   // - calls progress callbacks on 'downloading' event.
   // - throttles multiple update calls
   function wrapIntoUpdatePromise (method, options) {
-    if (updateDefer && updateDefer.state() === 'pending') {
+    if (updateDefer) {
       return updateDefer.promise;
     }
     updateDefer = utils.promise.defer();
@@ -106,16 +106,19 @@ Hoodie.extend(function(hoodie, lib, utils) {
     function reject() {
       updateDefer.reject();
       toggleBind('off');
+      updateDefer = undefined;
     }
 
     function resolve() {
       updateDefer.resolve(false);
       toggleBind('off');
+      updateDefer = undefined;
     }
 
     function handleUpdateReady() {
       updateDefer.resolve(true);
       toggleBind('off');
+      updateDefer = undefined;
     }
 
     function toggleBind(method) {
